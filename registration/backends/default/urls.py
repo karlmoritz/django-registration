@@ -50,5 +50,5 @@ urlpatterns = patterns('',
         direct_to_template,
         {'template': 'registration/registration_closed.html'},
         name='registration_disallowed'),
-    #(r'', include('registration.auth_urls')),
+    url(r'', include('registration.auth_urls')),
 )

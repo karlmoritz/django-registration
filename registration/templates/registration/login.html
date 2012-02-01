@@ -1,18 +1,20 @@
 {% extends "registration/base_registration.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Log in{% endblock %}
 {% block body_class %}{{ block.super }} login_form{% endblock %}
 
 
-{% block content_title %}
+{% block body %}
+
   <h2>Log in</h2>
-{% endblock %}
 
-
-{% block content %}
-  <form action="." method="post" class="login_form">{% csrf_token %}
-    {{ form.as_p }}
-    <p class="submit"><button type="submit" name="submit" value="Login">Log in</button></p>
+  <form action="." method="post" class="login_form uniForm">{% csrf_token %}
+    {{ form|crispy }}
+    <div class="buttonHolder">
+      <input type="submit" name="submit" value="Submit" class="submit submitButton" id="submit-id-submit" />
+    </div>
     {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
   </form>
 {% endblock %}

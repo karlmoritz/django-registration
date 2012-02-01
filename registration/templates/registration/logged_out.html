@@ -1,0 +1,31 @@
+{% extends "registration/base_registration.html" %}
+
+{% block title %}Logged out{% endblock %}
+{% block body_class %}{{ block.super }} logout{% endblock %}
+
+
+
+{% block body %}
+
+  <h2>Logged out</h2>
+  <p>You have been logged out.</p>
+
+  <form action="{% url django.contrib.auth.views.login %}" method="post" class="login_form uniForm">{% csrf_token %}
+    <div id="div_id_username" class="ctrlHolder">
+            <label for="id_username" class="requiredField">
+                Benutzername<span class="asteriskField">*</span>
+            </label>
+            <input id="id_username" type="text" class="textinput textInput" name="username" maxlength="30" />
+    </div>
+    <div id="div_id_password" class="ctrlHolder">
+            <label for="id_password" class="requiredField">
+                Passwort<span class="asteriskField">*</span>
+            </label>
+            <input id="id_password" type="password" class="textinput textInput" name="password" />
+    </div>
+    <div class="buttonHolder">
+      <input type="submit" name="submit" value="Submit" class="submit submitButton" id="submit-id-submit" />
+    </div>
+    <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}/{% endif %}">
+  </form>
+{% endblock %}

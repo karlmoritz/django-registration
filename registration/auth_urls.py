@@ -32,7 +32,7 @@ from forms import EmailAuthenticationForm as authentication_form
 urlpatterns = patterns('',
     url(r'^login/$',
         auth_views.login,
-        {'authentication_form':authentication_form},
+        #{'authentication_form':authentication_form},
         name='auth_login'),
     url(r'^logout/$',
         auth_views.logout,

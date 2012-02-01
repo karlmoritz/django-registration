@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
+
 class RegistrationForm(forms.Form):
     """
     Form for registering a new user account.
@@ -57,6 +61,16 @@ class RegistrationForm(forms.Form):
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(_("The two password fields didn't match."))
         return self.cleaned_data
+        
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'registration_register'
+        self.helper.add_input(Submit('submit', 'Submit'))
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        
 
 
 class RegistrationFormTermsOfService(RegistrationForm):

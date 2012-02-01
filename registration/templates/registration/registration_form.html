@@ -3,28 +3,10 @@
 
 {% block title %}{% trans 'Register' %}{% endblock %}
 
-{% block content %}
-	<h2>{% trans 'Register' %}</h2>
+{% block body %}
+  <h2>{% trans 'Register' %}</h2>
 
-	<form action="." method="post">{% csrf_token %}
+  {% load crispy_forms_tags %} {% crispy form form.helper %}
 
-		{% if form.hidden_fields %}
-			{% for item in form.hidden_fields %}
-				{{ item }}
-			{% endfor %}
-		{% endif %}
 
-		{% if form.non_field_errors %}
-			<p class="form-error">
-				{% for error in form.non_field_errors %}
-				<span class="form-error-msg">{{ error }}</span>
-				{% endfor %}
-			</p>
-		{% endif %}
-
-{% block content %}
-  <form action="." method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <p class="submit"><button type="submit">Submit</button></p>
-  </form>
 {% endblock %}
