@@ -36,6 +36,7 @@ class RegistrationForm(forms.Form):
                             label=_("Password"))
     password2 = forms.CharField(widget=forms.PasswordInput(render_value=False),
                             label=_("Reenter Password"))
+    email.required = False
     
     def clean_username(self):
         """
@@ -61,6 +62,18 @@ class RegistrationForm(forms.Form):
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(_("The two password fields didn't match."))
         return self.cleaned_data
+        
+    def clean_email(self):
+        """
+        Validate that the supplied email address is unique for the
+        site.
+        
+        """
+        if self.cleaned_data['email']:
+          if User.objects.filter(email__iexact=self.cleaned_data['email']):
+              raise forms.ValidationError(_("This email address is already in use. Please supply a different email address."))
+          return self.cleaned_data['email']
+        
         
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()

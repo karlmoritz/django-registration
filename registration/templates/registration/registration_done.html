@@ -1,0 +1,11 @@
+{% extends "registration/base_registration.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Activation email sent' %}{% endblock %}
+
+{% block body %}
+	<h2>{% trans 'Welcome' %}</h2>
+
+	<p>{% blocktrans %}You are done!{% endblocktrans %}</p>
+
+{% endblock %}
